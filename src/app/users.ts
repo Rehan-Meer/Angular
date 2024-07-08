@@ -1,4 +1,9 @@
 export const Users = [
+  {
+    id: 'u0',
+    name: 'Add user',
+    avatar: 'user-0.png',
+  },
     {
       id: 'u1',
       name: 'Jasmine Washington',
