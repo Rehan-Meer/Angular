@@ -1,0 +1,54 @@
+.container {
+    background-color: #3f2b97;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 400px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.content {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 20px;
+    height: 200px;
+    overflow-y: auto;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+   gap: 10px;
+}
+
+.buttons button {
+    color: #e0cfcf;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.1s;
+}
+
+.buttons .cancel {
+    background-color: #db1111eb;
+}
+
+.buttons .ok {
+    background-color: #19c04eeb;
+}
+
+.buttons .cancel:hover {
+    background-color: #f7061e;
+}
+.buttons .ok:hover {
+    background-color: #36d912;
+}

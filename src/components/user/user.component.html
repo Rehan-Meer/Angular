@@ -1,12 +1,6 @@
-<div *ngFor="let selectedUser of usersList" class="user-item">
-    <button>
-        <img [src]="'assets/users/' + selectedUser.avatar" [alt]="selectedUser.id"/>
-        <span>{{selectedUser.name}}</span>
-        <div class="menu-icon" (mouseenter)="showMenu = true" (mouseleave)="showMenu = false">
-            <div class="menu-options" *ngIf="showMenu">
-                <button (click)="editUser(selectedUser)">Edit</button>
-                <button (click)="deleteUser(selectedUser)">Delete</button>
-            </div>
-        </div>
+<div>
+    <button (click)="onSelectUser()">
+        <img [src]="ImagePath" [alt]="name()" />
+        <span>{{name()}}</span>
     </button>
 </div>
