@@ -8,12 +8,13 @@ import { Component,EventEmitter,Output } from "@angular/core";
     })
 export class HeaderComponent
 {
+ isclicked!: boolean
+  @Output() SignUpRequested = new EventEmitter<boolean>();
 
-  @Output() SignUpRequested = new EventEmitter<void>();
-  
   OnSignUp()
   {
-    this.SignUpRequested.emit();
+    this.isclicked = !this.isclicked
+    this.SignUpRequested.emit(true);
   }
 
 }

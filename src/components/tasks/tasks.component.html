@@ -1,12 +1,13 @@
-<<div class="container">
-    <div class="header">
-        {{Name}}
-    </div>
-    <div class="content">
-        Text
-    </div>
-    <div class="buttons">
-        <button class="ok">OK</button>
-        <button class="cancel">Cancel</button>
-    </div>
-</div>>
+<section id="tasks">
+    <header>
+        <h2>
+            {{Name}}'s Tasks
+        </h2>
+        <menu>
+            <button>Add Task</button>
+        </menu>
+    </header>
+    <ul>
+        <app-task-items></app-task-items>
+    </ul>
+</section>
