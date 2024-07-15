@@ -1,0 +1,96 @@
+div {
+  border-radius: 6px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: max-content;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.35rem 0.5rem;
+  background-color: #433352;
+  color: #c3b3d1;
+  border: none;
+  border-radius: inherit;
+  font: inherit;
+  cursor: pointer;
+  width: 80%;
+  min-width: 10rem;
+  text-align: left;
+  margin-bottom: 0rem;
+  position: relative;
+}
+
+button:hover,
+button:active,
+.active {
+  background-color: #9965dd;
+  color: #150722;
+}
+
+img {
+  width: 2rem;
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+}
+
+span {
+  margin: 0;
+  padding: 0;
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+
+.user-item {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.menu-icon {
+  margin-left: auto;
+  cursor: pointer;
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+}
+
+button:hover .menu-icon {
+  display: block;
+}
+
+.menu-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #ffffff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.menu-options button {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: #433352;
+}
+
+.menu-options button:hover {
+  background-color: #f0f0f0;
+}
+
+.user-item .menu-options {
+  display: block;
+}
