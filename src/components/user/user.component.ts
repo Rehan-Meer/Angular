@@ -1,12 +1,9 @@
-import { Component, Input, signal, input, computed, Output, EventEmitter, output } from "@angular/core";
-import { CommonModule } from '@angular/common';
-import { DivComponent } from "../../shared/div/div.component";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { type User } from "../../Models/user.model";
 
 @Component({
   selector: 'app-user',
-  standalone: true,
-  imports: [CommonModule, DivComponent],
+  standalone: false,
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
