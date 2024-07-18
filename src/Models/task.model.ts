@@ -4,4 +4,4 @@ export type Task = {
     title: string,
     summary: string,
     dueDate: string
-}
+};
