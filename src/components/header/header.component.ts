@@ -1,4 +1,4 @@
-import { Component,EventEmitter,Output } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
 @Component(
     {
   selector : 'app-header',
@@ -11,10 +11,8 @@ export class HeaderComponent
  isclicked!: boolean
   @Output() SignUpRequested = new EventEmitter<boolean>();
 
-  OnSignUp()
-  {
+  OnSignUp() {
     this.isclicked = !this.isclicked
     this.SignUpRequested.emit(true);
   }
-
 }

@@ -9,10 +9,7 @@ import { Component } from "@angular/core";
 export class SignUp
 {
 
-onSignUp()
-{
-
-    
-}
+  onSignUp() {
+  }
 
 }

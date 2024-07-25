@@ -12,9 +12,14 @@ export class AppComponent
   title = 'Angular';
   users = Users;
   selectedUserID!: string;
+  showSignupComponent = false;
 
   OnUserSelected(id: string){
     this.selectedUserID = id;
+  }
+
+  onShowSignup(){
+    this.showSignupComponent = true;
   }
 
   getSelectedUser(){

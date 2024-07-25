@@ -1,11 +1,12 @@
-<app-header/>
+<app-header (SignUpRequested)="onShowSignup()"/>
 <main>
     <ul id="users">
         <li *ngFor="let _user of users">
             <app-user (selectedUser)="OnUserSelected($event)" [user]="_user"/>
         </li>
     </ul>
-    <!-- <app-signup/> -->
+    <app-signup *ngIf="showSignupComponent"></app-signup>
     <app-tasks *ngIf="this.selectedUserID else fallback" [UserID]=this.selectedUserID [Name]="this.getSelectedUser()?.Name!"/>
+
     <ng-template #fallback> <p id="fallback"> Select a user. </p></ng-template>
 </main>
