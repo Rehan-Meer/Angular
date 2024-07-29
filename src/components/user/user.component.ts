@@ -1,27 +1,18 @@
-import { Component, Input, signal, input, computed, Output, EventEmitter, output } from "@angular/core";
-import { CommonModule } from '@angular/common';
-import { DivComponent } from "../../shared/div/div.component";
-
-type UserObject ={
- Id : string,
- Name : string,
- Avatar : string
-}
+import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { type User } from "../../Models/user.model";
 
 @Component({
   selector: 'app-user',
-  standalone: true,
-  imports: [CommonModule, DivComponent],
+  standalone: false,
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
 export class UserComponent {
 
-
   // @Input({ required: true }) Id !: string;
   // @Input({ required: true }) avatar !: string;
   // name = input.required<String>();
-  @Input({required : true}) user !: UserObject;
+  @Input({required : true}) user !: User;
   @Output() selectedUser = new EventEmitter<string>();
   //selectedUser = output<string>();
   
