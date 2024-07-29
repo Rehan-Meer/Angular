@@ -1,7 +1,7 @@
 <article>
-    <h2>{{userTask.title}}</h2>
-    <time >{{userTask.dueDate | date}}</time>
-    <p>{{userTask.summary}}</p>
+    <h2>{{userTask.Description}}</h2>
+    <time >{{userTask.CreatedDate| date}}</time>
+    <p>{{userTask.Description}}</p>
     <p class="actions">
         <button (click)="onCompleteClick()">Complete</button>
     </p>

@@ -1,7 +1,11 @@
+import { TaskStatus } from "./taskStatus.enum";
+
 export type Task = {
-    id: string,
-    userId: string,
-    title: string,
-    summary: string,
-    dueDate: string
+    Id: number,
+    userId: number,
+    Description: string,
+    CreatedDate: Date,
+    UpdatedDate: Date,
+    CompletedDate: Date,
+    Status : TaskStatus
 };

@@ -12,7 +12,7 @@
         </menu>
     </header>
     <ul>
-        @for (item of  SelectedUserTasks; track UserID) {
+        @for (item of  selectedUserTasks; track UserID) {
         <app-task-items [userTask]="item"></app-task-items>
         }
     </ul>

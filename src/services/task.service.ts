@@ -1,51 +1,29 @@
 import { Injectable } from '@angular/core';
-import { type Task } from '../Models/task.model';
+import type { Task } from '../Models/task.model';
+import { HttpClient } from '@angular/common/http';
+import { BASE_URL, Controller, EndPoint } from '../configurations/apiConfig';
+import { map, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
-  private Tasks = [
-    {
-      id: 't1',
-      userId: 'u1',
-      title: 'Master Angular',
-      summary:
-        'Learn all the basic and advanced features of Angular & how to apply them.',
-      dueDate: '2025-12-31',
-    },
-    {
-      id: 't2',
-      userId: 'u3',
-      title: 'Build first prototype',
-      summary: 'Build a first prototype of the online shop website',
-      dueDate: '2024-05-31',
-    },
-    {
-      id: 't3',
-      userId: 'u3',
-      title: 'Prepare issue template',
-      summary:
-        'Prepare and describe an issue template which will help with project management',
-      dueDate: '2024-06-15',
-    },
-  ];
-  constructor() {
-    const tasks = localStorage.getItem('tasks');
-    if (tasks) {
-      this.Tasks = JSON.parse(tasks);
-    }
+  
+  Tasks : Task[] =[]
+  
+  constructor(private client: HttpClient) {}
+
+  getTasks(userID: number) : Observable<Task[]> {
+
+    const url = `${BASE_URL}/${Controller.Main}/${EndPoint.GET_TASKS}`;
+    return this.client.get<Task[]>(url);
   }
 
-  getTask(userID: string) {
-    return this.Tasks.filter((task) => task.userId == userID);
-  }
-
-  addTask(task: Task) {
+  saveTask(task: Task) {
     this.Tasks.push(task);
     this.saveTasks();
   }
 
-  completeTask(taskID: string) {
-    this.Tasks = this.Tasks.filter((task) => task.id !== taskID);
+  completeTask(taskID: number) {
+    this.Tasks = this. Tasks.filter((task) => task.Id !== taskID);
     this.saveTasks();
   }
 

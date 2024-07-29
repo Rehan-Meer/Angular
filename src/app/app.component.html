@@ -1,7 +1,7 @@
 <app-header (SignUpRequested)="onShowSignup()"/>
 <main>
     <ul id="users">
-        <li *ngFor="let _user of users">
+        <li *ngFor="let _user of this.ActiveUsers">
             <app-user (selectedUser)="OnUserSelected($event)" [user]="_user"/>
         </li>
     </ul>
