@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
 import type { Task } from '../Models/task.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BaseURL, Controller, EndPoint } from '../configurations/apiConfig';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
-  
-  Tasks : Task[] =[]
-  
+  Tasks: Task[] = [];
+
   constructor(private client: HttpClient) {}
 
-  getTasks(userID: number) : Observable<Task[]> {
+  BuildClient(controller: string, method: string): string {
+    return `${BaseURL}/${controller}/${method}`;
+  }
 
-    const url = `${BaseURL}/${Controller.Main}/${EndPoint.GetTasks}`;
-    return this.client.get<Task[]>(url);
+  getTasks(userID: number): Observable<Task[]> {
+    const url = this.BuildClient(Controller.Main, EndPoint.GetTasks);
+    let params = new HttpParams().set('ID', userID);
+    return this.client.get<Task[]>(url, { params });
   }
 
   saveTask(task: Task) {
@@ -23,7 +26,7 @@ export class TaskService {
   }
 
   completeTask(taskID: number) {
-    this.Tasks = this. Tasks.filter((task) => task.Id !== taskID);
+    this.Tasks = this.Tasks.filter((task) => task.Id !== taskID);
     this.saveTasks();
   }
 

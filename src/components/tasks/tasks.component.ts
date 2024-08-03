@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../Models/task.model';
 
@@ -14,7 +14,21 @@ export class TasksComponent {
   taskAdded: boolean = false;
   selectedUserTasks ?: Task[];
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService) {
+  }
+
+  ngOnInit(): void {
+    this.taskService.getTasks(this.UserID).subscribe(
+      (data: Task[])=> {this.selectedUserTasks = data;},
+      error => {console.error('There was an error!', error);}
+    );
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['UserID'] || changes['Name']) {
+     this.SelectedUserTasks();  
+    }
+  }
 
   async SelectedUserTasks(): Promise<Task[]> {
     try
