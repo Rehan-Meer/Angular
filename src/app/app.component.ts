@@ -13,6 +13,15 @@ export class AppComponent
   title = 'Angular';
   ActiveUsers: User[] = [];
   selectedUserID!: number;
+  showSignupComponent : boolean = false;
+
+  AddUser: User = {
+    Id: 0,
+    Name: 'Add User',
+    Tasks: [],
+    Password: 'aa',
+    IsActive: true
+  };
 
   constructor(private userService : UserService){}
 
@@ -23,7 +32,6 @@ export class AppComponent
     );
   }
   
-
   OnUserSelected(id: number){
     this.selectedUserID = id;
   }

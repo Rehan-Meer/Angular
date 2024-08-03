@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import type { Task } from '../Models/task.model';
 import { HttpClient } from '@angular/common/http';
-import { BASE_URL, Controller, EndPoint } from '../configurations/apiConfig';
+import { BaseURL, Controller, EndPoint } from '../configurations/apiConfig';
 import { map, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -13,7 +13,7 @@ export class TaskService {
 
   getTasks(userID: number) : Observable<Task[]> {
 
-    const url = `${BASE_URL}/${Controller.Main}/${EndPoint.GET_TASKS}`;
+    const url = `${BaseURL}/${Controller.Main}/${EndPoint.GetTasks}`;
     return this.client.get<Task[]>(url);
   }
 

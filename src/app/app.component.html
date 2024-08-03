@@ -1,6 +1,7 @@
 <app-header (SignUpRequested)="onShowSignup()"/>
 <main>
     <ul id="users">
+        <app-user (selectedUser)="OnUserSelected($event)" [user]='AddUser'/>
         <li *ngFor="let _user of this.ActiveUsers">
             <app-user (selectedUser)="OnUserSelected($event)" [user]="_user"/>
         </li>
@@ -8,8 +9,7 @@
     <app-signup *ngIf="showSignupComponent"></app-signup>
     
     <!-- Check if selectedUserID is 0, if so render app-new-user -->
-    <ng-container *ngIf="selectedUserID === 'u0'; else taskOrFallback">
-        <app-new-user id="new-user"></app-new-user>
+    <ng-container *ngIf="selectedUserID === 0; else taskOrFallback">
     </ng-container>
 
     <!-- Check if selectedUserID is not 0 and is valid, otherwise fallback -->
