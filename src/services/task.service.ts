@@ -21,8 +21,8 @@ export class TaskService {
   }
 
   saveTask(task: Task) {
-    this.Tasks.push(task);
-    this.saveTasks();
+    const url = this.BuildClient(Controller.Main, EndPoint.CreateTask)
+    return this.client.post(url,task);
   }
 
   completeTask(taskID: number) {

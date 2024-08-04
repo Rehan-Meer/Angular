@@ -29,8 +29,6 @@ export class NewTaskComponent {
       UpdatedDate : new Date(),
       CompletedDate : new Date(),
       Status : TaskStatus.Archieved
-
-
     });
     this.onClose.emit();
   }
