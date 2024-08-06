@@ -6,31 +6,43 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
+
   Tasks: Task[] = [];
 
-  constructor(private client: HttpClient) {}
+  constructor(private client: HttpClient) { }
 
-  BuildClient(controller: string, method: string): string {
-    return `${BaseURL}/${controller}/${method}`;
+  BuildClient(controllerName: string, methodName: string): string {
+    return `${BaseURL}/${controllerName}/${methodName}`;
   }
 
-  getTasks(userID: number): Observable<Task[]> {
+  getTasks(_userID: number): Observable<Task[]> {
     const url = this.BuildClient(Controller.Main, EndPoint.GetTasks);
-    let params = new HttpParams().set('ID', userID);
-    return this.client.get<Task[]>(url, { params });
+    const params = new HttpParams().set('ID', _userID);
+    return this.client.get<Task[]>(url, {params});
   }
 
-  saveTask(task: Task) {
-    const url = this.BuildClient(Controller.Main, EndPoint.CreateTask)
-    return this.client.post(url,task);
+  saveTask(task: Task) :Observable<Task> {
+    const url = this.BuildClient(Controller.Main, EndPoint.CreateTask);
+    const payload = {
+      ...task,
+      CreatedDate: this.formatDateString(task.CreatedDate)
+    };
+    return this.client.post<Task>(url,payload);
   }
 
   completeTask(taskID: number) {
     this.Tasks = this.Tasks.filter((task) => task.Id !== taskID);
-    this.saveTasks();
   }
 
-  private saveTasks() {
-    localStorage.setItem('tasks', JSON.stringify(this.Tasks));
+  private formatDateString(date: Date | null): string {
+    if (!date) return '2024-08-05T13:18:24';
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = ('0' + (d.getMonth() + 1)).slice(-2);
+    const day = ('0' + d.getDate()).slice(-2);
+    const hours = ('0' + d.getHours()).slice(-2);
+    const minutes = ('0' + d.getMinutes()).slice(-2);
+    const seconds = ('0' + d.getSeconds()).slice(-2);
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
   }
 }

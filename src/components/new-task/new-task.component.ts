@@ -1,6 +1,7 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { TaskService } from '../../services/task.service';
 import { TaskStatus } from '../../Models/taskStatus.enum';
+import { Task } from '../../Models/task.model';
 
 @Component({
   selector: 'app-new-task',
@@ -10,7 +11,7 @@ import { TaskStatus } from '../../Models/taskStatus.enum';
 })
 export class NewTaskComponent {
   private taskService = inject(TaskService);
-  enteredDate = '';
+  enteredDate = new Date();
   enteredSummary = '';
   enteredTitle = '';
 
@@ -20,16 +21,22 @@ export class NewTaskComponent {
   onCloseClick(): void {
     this.onClose.emit();
   }
-  onSubmit(): void {
-    this.taskService.saveTask({
-      Id: +Math.random().toString(36).slice(2, 7),
-      userId: +this.UserID,
+  onSubmit(event : Event): void {
+     
+    event?.preventDefault()
+    const task: Task = {
+      Id: 0,
+      userId: this.UserID,
       Description: this.enteredTitle,
-      CreatedDate : new Date(),
-      UpdatedDate : new Date(),
-      CompletedDate : new Date(),
-      Status : TaskStatus.Archieved
+      CreatedDate: this.enteredDate, 
+      UpdatedDate: null, 
+      CompletedDate: null,
+      Status: TaskStatus.Archieved
+    };
+ 
+    this.taskService.saveTask(task).subscribe(response => {
+      console.log('Task saved:', response);
+      this.onClose.emit();
     });
-    this.onClose.emit();
   }
 }

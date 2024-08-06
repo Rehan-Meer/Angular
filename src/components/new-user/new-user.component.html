@@ -1,0 +1,38 @@
+<div class="form-container">
+    <div class="image-upload-container">
+      <input
+        type="file"
+        #fileInput
+        (change)="onImageUpload($event)"
+        accept="image/*"
+        style="display: none;"
+      />
+      <div
+        class="image-upload-placeholder"
+        (click)="triggerFileInput()"
+      >
+        <img
+          *ngIf="imageUrl"
+          [src]="imageUrl"
+          alt="Profile Image"
+          class="profile-image"
+        />
+        <span *ngIf="!imageUrl">Upload Image</span>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="userName">Name:</label>
+      <input
+        type="text"
+        id="userName"
+        placeholder="Enter your name"
+      />
+    </div>
+  
+    <div class="button-group">
+      <button (click)="onSubmit()">Submit</button>
+      <button (click)="onCancel()">Cancel</button>
+    </div>
+  </div>
+  

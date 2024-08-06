@@ -4,8 +4,8 @@ export type Task = {
   Id: number;
   userId: number;
   Description: string;
-  CreatedDate: Date;
-  UpdatedDate: Date;
-  CompletedDate: Date;
+  CreatedDate: Date ;
+  UpdatedDate: Date | null;
+  CompletedDate: Date | null;
   Status: TaskStatus;
 };
