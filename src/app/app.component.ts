@@ -31,6 +31,11 @@ export class AppComponent {
     );
   }
 
+  OnNewUserCreated (newUser : User)
+  {
+    this.ActiveUsers.push(newUser);
+  }
+
   OnUserSelected(id: number) {
     this.selectedUserID = id;
   }

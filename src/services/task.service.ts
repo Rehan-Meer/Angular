@@ -23,15 +23,13 @@ export class TaskService {
 
   saveTask(task: Task) :Observable<Task> {
     const url = this.BuildClient(Controller.Main, EndPoint.CreateTask);
-    const payload = {
-      ...task,
-      CreatedDate: this.formatDateString(task.CreatedDate)
-    };
+    const payload = {...task, CreatedDate: this.formatDateString(task.CreatedDate)};
     return this.client.post<Task>(url,payload);
   }
 
-  completeTask(taskID: number) {
-    this.Tasks = this.Tasks.filter((task) => task.Id !== taskID);
+  completeTask(Id: number) : void {
+    const url = this.BuildClient(Controller.Main, EndPoint.DeleteTask);
+    this.client.post(url, Id);
   }
 
   private formatDateString(date: Date | null): string {

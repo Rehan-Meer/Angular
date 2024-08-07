@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, output } from '@angular/core';
+
 import { ViewChild, ElementRef } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../Models/user.model';
@@ -18,7 +19,7 @@ export class NewUserComponent {
   constructor(private userService: UserService) { }
 
   @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement> | undefined;
-
+ @Output() NewUserCreated = new EventEmitter<User>();
   onImageUpload(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length) {
@@ -37,7 +38,7 @@ export class NewUserComponent {
 
     const user: User = {
       Id: 0,
-      Name: 'Judd Trump',
+      Name: this.userName,
       Tasks: [],
       Password: 'aa',
       IsActive: true
@@ -45,7 +46,7 @@ export class NewUserComponent {
 
     this.userService.createUser(user).subscribe({
       next: (response) => {
-        console.log('User created successfully:', response);
+        this.NewUserCreated.emit(user);
       },
       error: (error) => {
         console.error('Error creating user:', error);
@@ -54,9 +55,7 @@ export class NewUserComponent {
 
   }
 
-
   onCancel(): void {
-      // Handle form cancellation logic here
       this.userName = '';
       this.profileImage = null;
       this.imageUrl = null;
