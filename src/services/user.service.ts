@@ -18,4 +18,9 @@ export class UserService {
     const url = `${BaseURL}/${Controller.Main}/${EndPoint.GetAllUsers}`;
     return this.client.get<User[]>(url);
   }
+
+  createUser(user: User) :Observable<User> {
+    const url = `${BaseURL}/${Controller.Main}/${EndPoint.CreateUser}`;
+    return this.client.post<User>(url,user);
+  }
 }

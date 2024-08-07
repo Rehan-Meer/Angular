@@ -10,6 +10,7 @@
 
   <!-- Check if selectedUserID is 0, if so render app-new-user -->
   <ng-container *ngIf="selectedUserID === 0; else taskOrFallback">
+    <app-new-user></app-new-user>
   </ng-container>
 
   <!-- Check if selectedUserID is not 0 and is valid, otherwise fallback -->

@@ -9,7 +9,7 @@ import { NewUserComponent } from "../components/new-user/new-user.component";
 import { TaskModule } from "./task.module";
 import { HttpClientModule } from '@angular/common/http';
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, UserComponent, SignUp], // for non-standalone components
+  declarations: [AppComponent, HeaderComponent, UserComponent, SignUp,NewUserComponent], // for non-standalone components
   imports: [BrowserModule, TaskModule, SharedModule,HttpClientModule], //  for standalone components
   bootstrap: [AppComponent],
 })
