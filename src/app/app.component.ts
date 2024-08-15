@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Users } from '../app/users';
+import type { User } from '../Models/user.model';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -7,22 +8,43 @@ import { Users } from '../app/users';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent 
-{
+export class AppComponent {
   title = 'Angular';
-  users = Users;
-  selectedUserID!: string;
-  showSignupComponent = false;
+  ActiveUsers: User[] = [];
+  selectedUserID!: number;
+  showSignupComponent: boolean = false;
 
-  OnUserSelected(id: string){
+  AddUser: User = {
+    Id: 0,
+    Name: 'Add User',
+    Tasks: [],
+    Password: 'aa',
+    IsActive: true
+  };
+
+  constructor(private userService: UserService) { }
+
+  ngOnInit(): void {
+    this.userService.LoadUsers().subscribe(
+      (data: User[]) => { this.ActiveUsers = data; },
+      error => { console.error('There was an error!', error); }
+    );
+  }
+
+  OnNewUserCreated (newUser : User)
+  {
+    this.ActiveUsers.push(newUser);
+  }
+
+  OnUserSelected(id: number) {
     this.selectedUserID = id;
   }
 
-  onShowSignup(){
+  onShowSignup() {
     this.showSignupComponent = true;
   }
 
-  getSelectedUser(){
-    return this.users.find((user) => user.Id === this.selectedUserID);
+  getSelectedUser() {
+    return this.ActiveUsers.find((user) => user.Id === +this.selectedUserID);
   }
 }

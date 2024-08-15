@@ -13,10 +13,11 @@ export class UserComponent {
   // @Input({ required: true }) avatar !: string;
   // name = input.required<String>();
   @Input({required : true}) user !: User;
-  @Output() selectedUser = new EventEmitter<string>();
+  @Output() selectedUser = new EventEmitter<number>();
   //selectedUser = output<string>();
   
-  get ImagePath(){return 'assets/users/' + this.user.Avatar;}
+  get ImagePath(){return 'assets/users/' + this.user.Id +'.jpg';}
+  //get ImagePath(){return 'assets/users/';}
   //ImagePath = computed(() => { `assets/users/${this.avatar}`; })
 
   onSelectUser() {

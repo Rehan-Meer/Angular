@@ -12,8 +12,9 @@
         </menu>
     </header>
     <ul>
-        @for (item of  SelectedUserTasks; track UserID) {
-        <app-task-items [userTask]="item"></app-task-items>
-        }
+        <div *ngFor="let userTask of selectedUserTasks">
+            <app-task-items [userTask]="userTask"></app-task-items>
+        </div>
+        
     </ul>
 </section>

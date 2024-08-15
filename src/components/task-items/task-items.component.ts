@@ -13,6 +13,6 @@ export class TaskItemsComponent {
   @Input({ required: true }) userTask!: Task;
 
   onCompleteClick(): void {
-    this.taskService.completeTask(this.userTask.id);
+    this.taskService.completeTask(this.userTask.Id);
   }
 }

@@ -6,7 +6,7 @@ export const Users = [
   },
     {
       Id: 'u1',
-      Name: 'Jasmine Washington',
+      Name: 'Jasmine Lindt.',
       Avatar: 'user-1.jpg',
     },
     {

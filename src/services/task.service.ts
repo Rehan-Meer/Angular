@@ -1,55 +1,46 @@
 import { Injectable } from '@angular/core';
-import { type Task } from '../Models/task.model';
+import type { Task } from '../Models/task.model';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { BaseURL, Controller, EndPoint } from '../configurations/apiConfig';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
-  private Tasks = [
-    {
-      id: 't1',
-      userId: 'u1',
-      title: 'Master Angular',
-      summary:
-        'Learn all the basic and advanced features of Angular & how to apply them.',
-      dueDate: '2025-12-31',
-    },
-    {
-      id: 't2',
-      userId: 'u3',
-      title: 'Build first prototype',
-      summary: 'Build a first prototype of the online shop website',
-      dueDate: '2024-05-31',
-    },
-    {
-      id: 't3',
-      userId: 'u3',
-      title: 'Prepare issue template',
-      summary:
-        'Prepare and describe an issue template which will help with project management',
-      dueDate: '2024-06-15',
-    },
-  ];
-  constructor() {
-    const tasks = localStorage.getItem('tasks');
-    if (tasks) {
-      this.Tasks = JSON.parse(tasks);
-    }
+
+  Tasks: Task[] = [];
+
+  constructor(private client: HttpClient) { }
+
+  BuildClient(controllerName: string, methodName: string): string {
+    return `${BaseURL}/${controllerName}/${methodName}`;
   }
 
-  getTask(userID: string) {
-    return this.Tasks.filter((task) => task.userId == userID);
+  getTasks(_userID: number): Observable<Task[]> {
+    const url = this.BuildClient(Controller.Main, EndPoint.GetTasks);
+    const params = new HttpParams().set('ID', _userID);
+    return this.client.get<Task[]>(url, {params});
   }
 
-  addTask(task: Task) {
-    this.Tasks.push(task);
-    this.saveTasks();
+  saveTask(task: Task) :Observable<Task> {
+    const url = this.BuildClient(Controller.Main, EndPoint.CreateTask);
+    const payload = {...task, CreatedDate: this.formatDateString(task.CreatedDate)};
+    return this.client.post<Task>(url,payload);
   }
 
-  completeTask(taskID: string) {
-    this.Tasks = this.Tasks.filter((task) => task.id !== taskID);
-    this.saveTasks();
+  completeTask(Id: number) : void {
+    const url = this.BuildClient(Controller.Main, EndPoint.DeleteTask);
+    this.client.post(url, Id);
   }
 
-  private saveTasks() {
-    localStorage.setItem('tasks', JSON.stringify(this.Tasks));
+  private formatDateString(date: Date | null): string {
+    if (!date) return '2024-08-05T13:18:24';
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = ('0' + (d.getMonth() + 1)).slice(-2);
+    const day = ('0' + d.getDate()).slice(-2);
+    const hours = ('0' + d.getHours()).slice(-2);
+    const minutes = ('0' + d.getMinutes()).slice(-2);
+    const seconds = ('0' + d.getSeconds()).slice(-2);
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
   }
 }

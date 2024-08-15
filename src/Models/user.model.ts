@@ -1,5 +1,8 @@
-export type User = {
-  Id: string;
-  Name: string;
-  Avatar: string;
+export type User = 
+{
+    Id: number;
+    Name: string;
+    Tasks: any[];
+    Password: string;
+    IsActive: boolean;
 };
